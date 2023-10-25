@@ -22,7 +22,7 @@ function mutate_float_with_optional_decimals($input, $url_argument)
         return number_format($input, 0, ".", ",");
     }
 
-    return number_format($input, 2, ".", ",");
+    return number_format(floatval($input), 2, ".", ",");
 }
 
 /**
@@ -34,7 +34,7 @@ function mutate_float_with_optional_decimals($input, $url_argument)
  */
 function mutate_float_with_no_decimals($input, $url_argument)
 {
-    return number_format($input, 0, ".", ",");
+    return number_format(floatval($input), 0, ".", ",");
 }
 
 /**
@@ -116,7 +116,7 @@ function stp23_pdf_template_callback($host_configuration_array, $url_arguments_a
  */
 function stp23_raised_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    if(stp23_mode($url_arguments) === "raised-only") {
+    if (stp23_mode($url_arguments) === "raised-only") {
         $text_block_position["x"] = 105;
     }
     return $text_block_position;
@@ -148,7 +148,7 @@ function stp23_raised_text_block_toggle_callback($text_block, $url_arguments, $h
  */
 function stp23_steps_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    if(stp23_mode($url_arguments) === "steps-only") {
+    if (stp23_mode($url_arguments) === "steps-only") {
         $text_block_position["x"] = 105;
     }
     return $text_block_position;
