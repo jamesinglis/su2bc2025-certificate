@@ -94,11 +94,14 @@ function stp23_mode($url_arguments_array)
  */
 function stp23_pdf_template_callback($host_configuration_array, $url_arguments_array): string
 {
-    return match (stp23_mode($url_arguments_array)) {
-        "steps-only" => $host_configuration_array["pdf_template_steps_only"],
-        "raised-only" => $host_configuration_array["pdf_template_raised_only"],
-        default => $host_configuration_array["pdf_template"],
-    };
+    switch (stp23_mode($url_arguments_array)) {
+        case "steps-only":
+            return $host_configuration_array["pdf_template_steps_only"];
+        case "raised-only":
+            return $host_configuration_array["pdf_template_raised_only"];
+        default:
+            return $host_configuration_array["pdf_template"];
+    }
 }
 
 /**
