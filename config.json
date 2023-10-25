@@ -1,0 +1,163 @@
+{
+  "global": {
+    "debug_mode": false,
+    "show_borders": false,
+    "validate_arguments": true,
+    "cache_dynamic_files": true,
+    "cache_expiry_key": "jA9ZW76VN8YcjmVEsDq",
+    "cache_expiry_after": 7,
+    "locale": "en_AU.UTF-8"
+  },
+  "hosts": {
+    "default": {
+      "slug": "STP23",
+      "pdf_template": "resources/Steptember23 Certificate 3A.pdf",
+      "pdf_template_steps_only": "resources/Steptember23 Certificate 1A.pdf",
+      "pdf_template_raised_only": "resources/Steptember23 Certificate 2A.pdf",
+      "pdf_template_callback": "stp23_pdf_template_callback",
+      "pdf_orientation": "L",
+      "redirect_location": "https://www.steptember.org.au/",
+      "default": true,
+      "active": true
+    }
+  },
+  "url_arguments": [
+    {
+      "argument": "cache",
+      "type": "boolean",
+      "default": "1",
+      "default_callback": "",
+      "sanitize_callback": "sanitize_boolean_filter",
+      "validate_callback": "",
+      "validate_for_hosts": [],
+      "mutate_callback": ""
+    },
+    {
+      "argument": "name",
+      "type": "custom",
+      "default": "",
+      "default_callback": "",
+      "sanitize_callback": "sanitize_process_name_filter",
+      "validate_callback": "validate_not_empty",
+      "validate_for_hosts": [],
+      "mutate_callback": "mutate_to_uppercase"
+    },
+    {
+      "argument": "steps",
+      "type": "float",
+      "default": "",
+      "default_callback": "",
+      "sanitize_callback": "sanitize_process_name_filter",
+      "validate_callback": "validate_float_under_999999_allow_zero",
+      "validate_for_hosts": [],
+      "mutate_callback": "mutate_float_with_no_decimals"
+    },
+    {
+      "argument": "raised",
+      "type": "float",
+      "default": "",
+      "default_callback": "",
+      "sanitize_callback": "sanitize_process_name_filter",
+      "validate_callback": "validate_float_under_999999_allow_zero",
+      "validate_for_hosts": [],
+      "mutate_callback": "mutate_float_with_optional_decimals"
+    }
+  ],
+  "text_blocks": [
+    {
+      "text": "%%NAME%%",
+      "text_template": "name",
+      "text_block_callback": "",
+      "toggle_callback": "",
+      "text_callback": "",
+      "position_callback": "",
+      "position": {
+        "x": 55,
+        "y": 92,
+        "width": 178,
+        "height": 20,
+        "align": "C"
+      },
+      "fit_line": true
+    },
+    {
+      "text": "$%%RAISED%%",
+      "text_template": "fields",
+      "text_block_callback": "",
+      "toggle_callback": "stp23_raised_text_block_toggle_callback",
+      "text_callback": "",
+      "position_callback": "stp23_raised_text_block_position_callback",
+      "position": {
+        "x": 52,
+        "y": 163,
+        "width": 85.5,
+        "height": 18,
+        "align": "C"
+      },
+      "fit_line": true
+    },
+    {
+      "text": "%%STEPS%%",
+      "text_template": "fields",
+      "text_block_callback": "",
+      "toggle_callback": "stp23_steps_text_block_toggle_callback",
+      "text_callback": "",
+      "position_callback": "stp23_steps_text_block_position_callback",
+      "position": {
+        "x": 144,
+        "y": 163,
+        "width": 85.5,
+        "height": 18,
+        "align": "C"
+      },
+      "fit_line": true
+    }
+  ],
+  "image_blocks": [],
+  "text_templates": {
+    "standard": {
+      "r": 30,
+      "g": 41,
+      "b": 58,
+      "size": 32,
+      "font": "AtramentStd",
+      "style": "b"
+    },
+    "heading": {
+      "r": 223,
+      "g": 73,
+      "b": 38,
+      "size": 30,
+      "font": "AtramentStd",
+      "style": "b"
+    },
+    "name": {
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "size": 48,
+      "font": "AtramentStd",
+      "style": "b"
+    },
+    "fields": {
+      "r": 144,
+      "g": 193,
+      "b": 85,
+      "size": 68,
+      "font": "AtramentStd",
+      "style": "b"
+    }
+  },
+  "fonts": [
+    {
+      "name": "AtramentStd",
+      "style": "b",
+      "file": "AtramentStd-Bold.php"
+    },
+    {
+      "name": "AtramentStd",
+      "style": "bi",
+      "file": "AtramentStd-BoldItalic.php"
+    }
+  ]
+}
