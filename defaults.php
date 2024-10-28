@@ -7,6 +7,7 @@ $default_host = array(
     "pdf_template" => "",
     "pdf_template_callback" => "",
     "pdf_orientation" => "P",
+    "validate_arguments_callback" => "",
     "url_base" => "http://www.google.com",
     "redirect_location" => "http://www.google.com",
 );
@@ -26,6 +27,7 @@ $default_text_block = array(
     "text" => "",
     "text_template" => "standard",
     "toggle_callback" => "",
+    "toggle_for_hosts" => [],
     "position" => array(
         "x" => 10,
         "y" => 10,

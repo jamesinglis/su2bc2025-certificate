@@ -1,9 +1,9 @@
 vendor
 cache/*.pdf
-composer.lock
 composer.phar
+resources/fonts/
 resources/recipients.csv
 resources/recipients_output.csv
-resources/fonts/*
 config.local.php
 config-override.json
+.idea

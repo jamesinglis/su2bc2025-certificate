@@ -216,6 +216,12 @@ A mutate function will affect all instances that a value is used. At present, th
 
 ## Version history
 
+### 0.4 (2024-10-21)
+* Adds missing handling for validation of all arguments on a per-host basis
+
+### 0.3 (2024-04-03)
+* Updates solution to use PHP 8.2
+
 ### 0.2 (2017-11-22)
 * Sets the locale as per config
 * Ensure cache filenames are being generated with non-mutated values

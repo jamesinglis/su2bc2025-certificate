@@ -9,9 +9,9 @@
  *
  * @param $input
  * @param array $url_argument
- * @return mixed
+ * @return string
  */
-function mutate_float_with_optional_decimals($input, $url_argument)
+function mutate_float_with_optional_decimals($input, array $url_argument): string
 {
     if ($input == '') {
         return $input;
@@ -30,9 +30,9 @@ function mutate_float_with_optional_decimals($input, $url_argument)
  *
  * @param $input
  * @param array $url_argument
- * @return mixed
+ * @return string
  */
-function mutate_float_with_no_decimals($input, $url_argument)
+function mutate_float_with_no_decimals($input, array $url_argument): string
 {
     return number_format(floatval($input), 0, ".", ",");
 }
@@ -42,9 +42,9 @@ function mutate_float_with_no_decimals($input, $url_argument)
  *
  * @param $input
  * @param array $url_argument
- * @return mixed
+ * @return string
  */
-function capitalize_input($input, $url_argument)
+function capitalize_input($input, array $url_argument): string
 {
     return strtoupper($input);
 }
@@ -57,7 +57,7 @@ function capitalize_input($input, $url_argument)
  * @param string $input
  * @return bool
  */
-function validate_float_under_999999_allow_zero($input)
+function validate_float_under_999999_allow_zero(string $input): bool
 {
     return floatval($input) < 999999 && floatval($input) >= 0;
 }
