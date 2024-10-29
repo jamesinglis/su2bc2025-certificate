@@ -74,7 +74,7 @@ function mutate_to_uppercase($input, $url_argument)
     return strtoupper($input);
 }
 
-function stp23_mode($url_arguments_array)
+function stp24_mode($url_arguments_array)
 {
     if ($url_arguments_array["raised"]["active"] == 0) {
         return "steps-only";
@@ -92,9 +92,9 @@ function stp23_mode($url_arguments_array)
  * @param array $url_arguments_array
  * @return string Relative path to PDF template
  */
-function stp23_pdf_template_callback($host_configuration_array, $url_arguments_array): string
+function stp24_pdf_template_callback($host_configuration_array, $url_arguments_array): string
 {
-    switch (stp23_mode($url_arguments_array)) {
+    switch (stp24_mode($url_arguments_array)) {
         case "steps-only":
             return $host_configuration_array["pdf_template_steps_only"];
         case "raised-only":
@@ -114,9 +114,9 @@ function stp23_pdf_template_callback($host_configuration_array, $url_arguments_a
  * @param array $host_configuration_array
  * @return array
  */
-function stp23_raised_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
+function stp24_raised_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    if (stp23_mode($url_arguments) === "raised-only") {
+    if (stp24_mode($url_arguments) === "raised-only") {
         $text_block_position["x"] = 105;
     }
     return $text_block_position;
@@ -131,9 +131,9 @@ function stp23_raised_text_block_position_callback($text_block_position, $text_b
  * @param array $host_configuration_array
  * @return bool
  */
-function stp23_raised_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
+function stp24_raised_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    return stp23_mode($url_arguments) !== "steps-only";
+    return stp24_mode($url_arguments) !== "steps-only";
 }
 
 /**
@@ -146,9 +146,9 @@ function stp23_raised_text_block_toggle_callback($text_block, $url_arguments, $h
  * @param array $host_configuration_array
  * @return array
  */
-function stp23_steps_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
+function stp24_steps_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    if (stp23_mode($url_arguments) === "steps-only") {
+    if (stp24_mode($url_arguments) === "steps-only") {
         $text_block_position["x"] = 105;
     }
     return $text_block_position;
@@ -163,7 +163,7 @@ function stp23_steps_text_block_position_callback($text_block_position, $text_bl
  * @param array $host_configuration_array
  * @return bool
  */
-function stp23_steps_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
+function stp24_steps_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
 {
-    return stp23_mode($url_arguments) !== "raised-only";
+    return stp24_mode($url_arguments) !== "raised-only";
 }
