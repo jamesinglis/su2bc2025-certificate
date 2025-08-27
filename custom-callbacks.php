@@ -120,7 +120,8 @@ function event_pdf_template_callback(array $host_configuration_array, array $url
 function event_raised_text_block_position_callback(array $text_block_position, array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): array
 {
     if (event_mode($url_arguments) === 'raised-only') {
-        $text_block_position['x'] = 105;
+        $text_block_position['x'] = 64;
+        $text_block_position['width'] = 169;
     }
     return $text_block_position;
 }
