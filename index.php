@@ -114,11 +114,6 @@ foreach ($config['url_arguments'] as $url_argument) {
     $cache_filename[] = $url_arguments[$argument_name]['original'];
 }
 
-// If there's a host level validation callback, run it and flag if it returns false
-if (!empty($config['hosts'][$host]['validate_arguments_callback']) && is_callable($config['hosts'][$host]['validate_arguments_callback'])) {
-    $valid_arguments = call_user_func($config['hosts'][$host]['validate_arguments_callback'], $url_arguments, $config['hosts'][$host]);
-}
-
 // If we're validating the arguments and any of the above have failed their validation callback, now is the time to bail out to the redirect location
 if ($config['global']['validate_arguments'] && $valid_arguments === false) {
     if ($config['global']['debug_mode']) {
@@ -132,6 +127,7 @@ if ($config['global']['validate_arguments'] && $valid_arguments === false) {
     exit();
 }
 
+$cache_filename[] = substr(md5(json_encode($config)), 0, 6);
 $filename = preg_replace('/[^A-Za-z0-9-.]+/', '_', implode('-', $cache_filename)) . '.pdf';
 $file_path = __DIR__ . '/cache/' . $filename;
 

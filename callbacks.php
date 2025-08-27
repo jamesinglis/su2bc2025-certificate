@@ -42,10 +42,9 @@ function validate_custom_callback($input, array $url_argument)
  * Host level custom validation callback
  *
  * @param array $url_arguments
- * @param array $host_configuration_array
  * @return bool
  */
-function host_validate_custom_callback(array $url_arguments, array $host_configuration_array)
+function host_validate_custom_callback(array $url_arguments)
 {
     return array_key_exists('name', $url_arguments);
 }

@@ -5,13 +5,13 @@
  */
 
 /**
- * Formats a number as a currency amount with no
+ * Formats a number as a currency amount with optional decimals
  *
- * @param $input
+ * @param string $input
  * @param array $url_argument
  * @return string
  */
-function mutate_float_with_optional_decimals($input, array $url_argument): string
+function mutate_float_with_optional_decimals(string $input, array $url_argument): string
 {
     if ($input == '') {
         return $input;
@@ -19,32 +19,32 @@ function mutate_float_with_optional_decimals($input, array $url_argument): strin
 
     // If the amount is .00, omit it
     if (intval($input) == floatval($input)) {
-        return number_format($input, 0, ".", ",");
+        return number_format($input, 0, '.', ',');
     }
 
-    return number_format(floatval($input), 2, ".", ",");
+    return number_format(floatval($input), 2, '.', ',');
 }
 
 /**
- * Formats a number as a currency amount with no
+ * Formats a number as a currency amount with no decimals
  *
- * @param $input
+ * @param string $input
  * @param array $url_argument
  * @return string
  */
-function mutate_float_with_no_decimals($input, array $url_argument): string
+function mutate_float_with_no_decimals(string $input, array $url_argument): string
 {
-    return number_format(floatval($input), 0, ".", ",");
+    return number_format(floatval($input), 0, '.', ',');
 }
 
 /**
  * Capitalize the input
  *
- * @param $input
+ * @param string $input
  * @param array $url_argument
  * @return string
  */
-function capitalize_input($input, array $url_argument): string
+function capitalize_input(string $input, array $url_argument): string
 {
     return strtoupper($input);
 }
@@ -67,21 +67,27 @@ function validate_float_under_999999_allow_zero(string $input): bool
  *
  * @param string $input
  * @param array $url_argument
- * @return mixed
+ * @return string
  */
-function mutate_to_uppercase($input, $url_argument)
+function mutate_to_uppercase(string $input, array $url_argument): string
 {
     return strtoupper($input);
 }
 
-function stp24_mode($url_arguments_array)
+/**
+ * Determine the certificate mode based on URL arguments
+ *
+ * @param array $url_arguments_array
+ * @return string Returns 'steps-only', 'raised-only', or 'both'
+ */
+function event_mode(array $url_arguments_array): string
 {
-    if ($url_arguments_array["raised"]["active"] == 0) {
-        return "steps-only";
-    } elseif ($url_arguments_array["steps"]["active"] == 0) {
-        return "raised-only";
+    if ($url_arguments_array['raised']['active'] == 0) {
+        return 'steps-only';
+    } elseif ($url_arguments_array['steps']['active'] == 0) {
+        return 'raised-only';
     } else {
-        return "both";
+        return 'both';
     }
 }
 
@@ -92,16 +98,13 @@ function stp24_mode($url_arguments_array)
  * @param array $url_arguments_array
  * @return string Relative path to PDF template
  */
-function stp24_pdf_template_callback($host_configuration_array, $url_arguments_array): string
+function event_pdf_template_callback(array $host_configuration_array, array $url_arguments_array): string
 {
-    switch (stp24_mode($url_arguments_array)) {
-        case "steps-only":
-            return $host_configuration_array["pdf_template_steps_only"];
-        case "raised-only":
-            return $host_configuration_array["pdf_template_raised_only"];
-        default:
-            return $host_configuration_array["pdf_template"];
-    }
+    return match (event_mode($url_arguments_array)) {
+        'steps-only' => $host_configuration_array['pdf_template_steps_only'],
+        'raised-only' => $host_configuration_array['pdf_template_raised_only'],
+        default => $host_configuration_array['pdf_template'],
+    };
 }
 
 /**
@@ -114,10 +117,10 @@ function stp24_pdf_template_callback($host_configuration_array, $url_arguments_a
  * @param array $host_configuration_array
  * @return array
  */
-function stp24_raised_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
+function event_raised_text_block_position_callback(array $text_block_position, array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): array
 {
-    if (stp24_mode($url_arguments) === "raised-only") {
-        $text_block_position["x"] = 105;
+    if (event_mode($url_arguments) === 'raised-only') {
+        $text_block_position['x'] = 105;
     }
     return $text_block_position;
 }
@@ -131,9 +134,9 @@ function stp24_raised_text_block_position_callback($text_block_position, $text_b
  * @param array $host_configuration_array
  * @return bool
  */
-function stp24_raised_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
+function event_raised_text_block_toggle_callback(array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): bool
 {
-    return stp24_mode($url_arguments) !== "steps-only";
+    return event_mode($url_arguments) !== 'steps-only';
 }
 
 /**
@@ -146,10 +149,10 @@ function stp24_raised_text_block_toggle_callback($text_block, $url_arguments, $h
  * @param array $host_configuration_array
  * @return array
  */
-function stp24_steps_text_block_position_callback($text_block_position, $text_block, $url_arguments, $host_name, $host_configuration_array)
+function event_steps_text_block_position_callback(array $text_block_position, array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): array
 {
-    if (stp24_mode($url_arguments) === "steps-only") {
-        $text_block_position["x"] = 105;
+    if (event_mode($url_arguments) === 'steps-only') {
+        $text_block_position['x'] = 105;
     }
     return $text_block_position;
 }
@@ -163,7 +166,7 @@ function stp24_steps_text_block_position_callback($text_block_position, $text_bl
  * @param array $host_configuration_array
  * @return bool
  */
-function stp24_steps_text_block_toggle_callback($text_block, $url_arguments, $host_name, $host_configuration_array)
+function event_steps_text_block_toggle_callback(array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): bool
 {
-    return stp24_mode($url_arguments) !== "raised-only";
+    return event_mode($url_arguments) !== 'raised-only';
 }

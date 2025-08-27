@@ -4,9 +4,44 @@
     "show_borders": false,
     "validate_arguments": true,
     "cache_dynamic_files": true,
-    "cache_expiry_key": "jA9ZW76VN8YcjmVEsDq",
+    "cache_expiry_key": "AM9gPGvyYdKw20mjKVnHEmp1",
     "cache_expiry_after": 7,
-    "locale": "en_AU.UTF-8"
+    "locale": "en_AU.UTF-8",
+    "expose_test_links": true,
+    "allow_toggle_self_link": false
+  },
+  "environments": {
+    "dev": {
+      "url": "https://su2bc2025-certificate.ddev.site:8443",
+      "label": "Development",
+      "expose": false,
+      "visible": true,
+      "key": ""
+    },
+    "prod": {
+      "url": "https://stepcertificate.com",
+      "label": "Production",
+      "expose": true,
+      "visible": true,
+      "key": "PZalUe5Qc24VQ3mQ002n3naf"
+    }
+  },
+  "test_versions": {
+    "default": {
+      "name": "James Inglis",
+      "steps": 10000,
+      "raised": 1234
+    },
+    "steps_only": {
+      "name": "James Inglis",
+      "steps": 10000,
+      "raised": 0
+    },
+    "raised_only": {
+      "name": "James Inglis",
+      "steps": 0,
+      "raised": 1234
+    }
   },
   "hosts": {
     "default": {
@@ -14,7 +49,7 @@
       "pdf_template": "resources/Steptember24 Certificate 3A.pdf",
       "pdf_template_steps_only": "resources/Steptember24 Certificate 1A.pdf",
       "pdf_template_raised_only": "resources/Steptember24 Certificate 2A.pdf",
-      "pdf_template_callback": "stp24_pdf_template_callback",
+      "pdf_template_callback": "event_pdf_template_callback",
       "pdf_orientation": "L",
       "redirect_location": "https://www.steptember.org.au/",
       "default": true,
@@ -84,9 +119,9 @@
       "text": "$%%RAISED%%",
       "text_template": "fields",
       "text_block_callback": "",
-      "toggle_callback": "stp24_raised_text_block_toggle_callback",
+      "toggle_callback": "event_raised_text_block_toggle_callback",
       "text_callback": "",
-      "position_callback": "stp24_raised_text_block_position_callback",
+      "position_callback": "event_raised_text_block_position_callback",
       "position": {
         "x": 52,
         "y": 163,
@@ -100,9 +135,9 @@
       "text": "%%STEPS%%",
       "text_template": "fields",
       "text_block_callback": "",
-      "toggle_callback": "stp24_steps_text_block_toggle_callback",
+      "toggle_callback": "event_steps_text_block_toggle_callback",
       "text_callback": "",
-      "position_callback": "stp24_steps_text_block_position_callback",
+      "position_callback": "event_steps_text_block_position_callback",
       "position": {
         "x": 144,
         "y": 163,
