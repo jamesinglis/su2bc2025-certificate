@@ -47,11 +47,11 @@
     "default": {
       "slug": "SU25",
       "pdf_template": "resources/SU25 Certificate BLANK.pdf",
-      "pdf_template_steps_only": "resources/SU25 Certificate BLANK.pdf",
+      "pdf_template_steps_only": "resources/SU25 Certificate Steps Only BLANK.pdf",
       "pdf_template_raised_only": "resources/SU25 Certificate Raised Only BLANK.pdf",
       "pdf_template_callback": "event_pdf_template_callback",
       "pdf_orientation": "L",
-      "redirect_location": "https://www.steptember.org.au/",
+      "redirect_location": "https://fundraise.nbcf.org.au/event/step-up/home",
       "default": true,
       "active": true
     }
@@ -132,7 +132,7 @@
       "fit_line": true
     },
     {
-      "text": "%%STEPS%%",
+      "text": "%%STEPS%%KM",
       "text_template": "fields",
       "text_block_callback": "",
       "toggle_callback": "event_steps_text_block_toggle_callback",

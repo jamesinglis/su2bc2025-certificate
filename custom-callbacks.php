@@ -101,7 +101,7 @@ function event_mode(array $url_arguments_array): string
 function event_pdf_template_callback(array $host_configuration_array, array $url_arguments_array): string
 {
     return match (event_mode($url_arguments_array)) {
-//        'steps-only' => $host_configuration_array['pdf_template_steps_only'],
+        'steps-only' => $host_configuration_array['pdf_template_steps_only'],
         'raised-only' => $host_configuration_array['pdf_template_raised_only'],
         default => $host_configuration_array['pdf_template'],
     };
@@ -153,7 +153,8 @@ function event_raised_text_block_toggle_callback(array $text_block, array $url_a
 function event_steps_text_block_position_callback(array $text_block_position, array $text_block, array $url_arguments, string $host_name, array $host_configuration_array): array
 {
     if (event_mode($url_arguments) === 'steps-only') {
-        $text_block_position['x'] = 105;
+        $text_block_position['x'] = 64;
+        $text_block_position['width'] = 169;
     }
     return $text_block_position;
 }
